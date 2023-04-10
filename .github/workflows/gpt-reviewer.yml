@@ -23,7 +23,7 @@ message:[
 {role:''system'',content:''You are reviewer for the pull request.''},
 {role:''user'',content:''Review and optimize following code (you can fix the code in the code block and attach the detail reason):
 
-''+require(''fs'').readFileSync(''diff.patch'').toString()},
+''},
 ]
 }))" > data.json'
       - name: Dump data
