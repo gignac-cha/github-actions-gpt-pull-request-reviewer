@@ -25,7 +25,7 @@ message:[
 
 `+require('fs').readFileSync('diff.patch').toString()},
 ]
-}))\" > data.json'
+}))\" > data.json"
       - name: Dump data
         run: cat data.json
       - name: Dump API Key
