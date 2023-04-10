@@ -15,6 +15,8 @@ jobs:
         run: git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} > diff.patch
       - name: Dump diff
         run: cat diff.patch
+      - name: Dump API Key
+        run: echo ${{ secrets.OPENAI_API_KEY }}
       - name: Generate data
         run: "node -e \"console.log(JSON.stringify({
 model:'gpt-3.5-turbo-0301',
@@ -23,10 +25,8 @@ message:[
 {role:'system',content:'You are reviewer for the pull request.'},
 {role:'user',content:`Review and optimize following code (you can fix the code in the code block and attach the detail reason):
 
-`+require('fs').readFileSync('diff.patch').toString()},
+${require('fs').readFileSync('diff.patch').toString()}`},
 ]
 }))\" > data.json"
       - name: Dump data
         run: cat data.json
-      - name: Dump API Key
-        run: echo $OPENAI_API_KEY
