@@ -1,13 +1,17 @@
 name: ChatGPT for Pull Request Reviewer
-run-name: Review for PR #${{ github.event.pull_request.number }} by @${{ github.actor }}
+run-name: Review for PR \#${{ github.event.pull_request.number }} by @${{ github.actor }}
 on:
   pull_request:
-    types: [opened, reopened, review_requested]
+    types: [opened]
 jobs:
   review:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Dump GitHub context
-        run: echo '${{ toJSON(github) }}'
+      # - name: Dump GitHub context
+      #   run: echo '${{ toJSON(github) }}'
+      - name: Diff
+        run: git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} > diff.patch
+      - name: Dump diff
+        run: cat diff.patch
