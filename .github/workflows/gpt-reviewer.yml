@@ -16,7 +16,7 @@ jobs:
       - name: Generate data
         run: "node -e \"console.log(JSON.stringify({
 model:'gpt-3.5-turbo-0301',
-message:[
+messages:[
 {role:'system',content:'You are the software engineer.'},
 {role:'system',content:'You are reviewer for the pull request.'},
 {role:'user',content:'Review and optimize following code (you can fix the code in the code block and attach the detail reason):\\n\\n'+require('fs').readFileSync('diff.patch').toString()},
