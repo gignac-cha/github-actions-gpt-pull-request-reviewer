@@ -2,7 +2,7 @@ name: ChatGPT for Pull Request Reviewer
 run-name: "Review for PR #${{ github.event.pull_request.number }} by @${{ github.actor }}"
 on:
   pull_request:
-    types: [opened]
+    types: [opened, reopened]
 jobs:
   review:
     runs-on: ubuntu-latest
@@ -16,16 +16,16 @@ jobs:
       - name: Dump diff
         run: cat diff.patch
       - name: Generate data
-        run: node -e "console.log(JSON.stringify({\
-model:'gpt-3.5-turbo-0301',\
+        run: 'node -e "console.log(JSON.stringify({\
+model:''gpt-3.5-turbo-0301'',\
 message:[\
-{role:'system',content:'You are the software engineer.'}\
-{role:'system',content:'You are reviewer for the pull request.'}\
-{role:'user',content:`Review and optimize following code (you can fix the code in the code block and attach the detail reason):
+{role:''system'',content:''You are the software engineer.''}\
+{role:''system'',content:''You are reviewer for the pull request.''}\
+{role:''user'',content:`Review and optimize following code (you can fix the code in the code block and attach the detail reason):
 
-${require('fs').readFileSync('diff.patch').toString()}`}\
+${require(''fs'').readFileSync(''diff.patch'').toString()}`}\
 ]\
-}))" > data.json
+}))" > data.json'
       - name: Dump data
         run: cat data.json
       - name: Dump API Key
