@@ -1,5 +1,5 @@
 name: ChatGPT for Pull Request Reviewer
-run-name: Review for PR \#${{ github.event.pull_request.number }} by @${{ github.actor }}
+run-name: "Review for PR #${{ github.event.pull_request.number }} by @${{ github.actor }}"
 on:
   pull_request:
     types: [opened]
@@ -11,7 +11,9 @@ jobs:
         uses: actions/checkout@v3
       # - name: Dump GitHub context
       #   run: echo '${{ toJSON(github) }}'
-      - name: Diff
+      - name: git fetch
+        run: git fetch
+      - name: git diff
         run: git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} > diff.patch
       - name: Dump diff
         run: cat diff.patch
