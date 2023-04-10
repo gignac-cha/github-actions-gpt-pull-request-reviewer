@@ -15,17 +15,15 @@ jobs:
         run: git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} > diff.patch
       - name: Dump diff
         run: cat diff.patch
-      - name: Test
-        run: 'node -e "console.log(''Review and optimize following code (you can fix the code in the code block and attach the detail reason):''+require(''fs'').readFileSync(''diff.patch'').toString())"'
       - name: Generate data
         run: 'node -e "console.log(JSON.stringify({
 model:''gpt-3.5-turbo-0301'',
 message:[
 {role:''system'',content:''You are the software engineer.''},
 {role:''system'',content:''You are reviewer for the pull request.''},
-{role:''user'',content:`Review and optimize following code (you can fix the code in the code block and attach the detail reason):
+{role:''user'',content:''Review and optimize following code (you can fix the code in the code block and attach the detail reason):
 
-${require(''fs'').readFileSync(''diff.patch'').toString()}`},
+''+require(''fs'').readFileSync(''diff.patch'').toString()},
 ]
 }))" > data.json'
       - name: Dump data
