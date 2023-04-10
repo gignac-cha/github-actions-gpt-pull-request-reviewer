@@ -22,9 +22,9 @@ message:[
 {role:'user',content:'Review and optimize following code (you can fix the code in the code block and attach the detail reason):\\n\\n'+require('fs').readFileSync('diff.patch').toString()},
 ]
 }))\" > data.json"
-      - name: Request OpenAI API
-        run: curl https://api.openai.com/v1/chat/completions -H 'Content-Type: application/json' -H 'Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}' -d @data.json > response.json
-      - name: Test
-        run: cat response.json
-      - name: Test
-        run: cat response.json | jq
+      # - name: Request OpenAI API
+      #   run: curl https://api.openai.com/v1/chat/completions -H "Content-Type: application/json" -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" -d @data.json > response.json
+      # - name: Test
+      #   run: cat response.json
+      # - name: Test
+      #   run: cat response.json | jq
