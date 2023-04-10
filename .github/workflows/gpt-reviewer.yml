@@ -23,7 +23,7 @@ message:[
 ]
 }))\" > data.json"
       - name: Request OpenAI API
-        run: curl https://api.openai.com/v1/chat/completions -H 'Content-Type: application/json' -H 'Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}' -d @data.json > response.json
+        run: "curl https://api.openai.com/v1/chat/completions -H 'Content-Type: application/json' -H 'Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}' -d @data.json > response.json"
       - name: Test
         run: cat response.json
       - name: Test
