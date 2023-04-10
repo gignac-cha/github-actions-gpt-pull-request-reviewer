@@ -1,5 +1,5 @@
 name: ChatGPT for Pull Request Reviewer
-run-name: 'Review for PR #${{ github.event.pull_request.number }} by @${{ github.actor }}"
+run-name: "Review for PR #${{ github.event.pull_request.number }} by @${{ github.actor }}"
 on:
   pull_request:
     types: [opened, reopened]
