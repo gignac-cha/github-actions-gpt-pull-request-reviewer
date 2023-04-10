@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: `git fetch`
+      - name: "Run `git fetch`"
         run: git fetch
-      - name: `git diff`
+      - name: "Run `git diff`"
         run: git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} > diff.patch
       - name: Generate data
         run: "node -e \"console.log(JSON.stringify({
@@ -23,7 +23,7 @@ message:[
 ]
 }))\" > data.json"
       - name: Request OpenAI API
-        run: curl https://api.openai.com/v1/chat/completions -H 'Content-Type: application/json' -H 'Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}' -d @data.json > response.json
+        run: curl https://api.openai.com/v1/chat/completions -H "Content-Type: application/json" -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" -d @data.json > response.json
       - name: Test
         run: cat response.json
       - name: Test
