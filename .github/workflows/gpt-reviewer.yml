@@ -2,7 +2,7 @@ name: ChatGPT for Pull Request Reviewer
 run-name: Review for PR #${{ github.event.pull_request.number }} by @${{ github.actor }}
 on:
   pull_request:
-    types: [review_requested]
+    types: [opened, reopened, review_requested]
 jobs:
   review:
     runs-on: ubuntu-latest
