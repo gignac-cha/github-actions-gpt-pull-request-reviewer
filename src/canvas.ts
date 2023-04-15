@@ -23,7 +23,7 @@ interface ImageProperties {
 type Nullable<T> = T | undefined | null;
 
 export class Canvas {
-  private _renderer: Nulalble<Renderer>;
+  private _renderer: Nullable<Renderer>;
 
   constructor(protected element: HTMLCanvasElement) {}
 
