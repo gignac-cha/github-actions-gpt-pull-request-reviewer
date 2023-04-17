@@ -5,5 +5,6 @@ interface APIGatewayProxyEvent {
 }
 
 export const handler = async (event: APIGatewayProxyEvent) => {
+  console.log(event);
   return { hello: 'world' };
 };
