@@ -20,8 +20,10 @@ interface ImageProperties {
   ratio?: number;
 }
 
+type Nullable<T> = T | undefined | null;
+
 export class Canvas {
-  private _renderer: Renderer | undefined;
+  private _renderer: Nullable<Renderer>;
 
   constructor(protected element: HTMLCanvasElement) {}
 
@@ -126,12 +128,6 @@ export class Canvas {
     const { context }: Canvas = this;
     context.font = `Consolas ${size}px`;
     context.fillText(text, start.x, start.y);
-    context.closePath();
-    context.restore();
-  }
-  image({ image, start, imageStart, size, ratio = 1 }: ImageProperties) {
-    const { context }: Canvas = this;
-    context.drawImage(image, imageStart.x, imageStart.y, size.width, size.height, start.x, start.y, size.width * ratio, size.height * ratio);
     context.closePath();
     context.restore();
   }
